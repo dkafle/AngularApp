@@ -23,6 +23,7 @@
   "homepage": "https://github.com/dkafle/AngularApp#readme",
   "dependencies": {
     "angular": "^1.5.7",
+    "aws-sdk": "^2.4.7",
     "bootstrap": "^3.3.6"
   }
 }
