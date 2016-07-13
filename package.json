@@ -1,0 +1,28 @@
+{
+  "name": "angular-demo-app",
+  "version": "1.0.0",
+  "description": "Angular Demo App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkafle/AngularApp.git"
+  },
+  "keywords": [
+    "angular",
+    "demo",
+    "spa"
+  ],
+  "author": "dkafle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dkafle/AngularApp/issues"
+  },
+  "homepage": "https://github.com/dkafle/AngularApp#readme",
+  "dependencies": {
+    "angular": "^1.5.7",
+    "bootstrap": "^3.3.6"
+  }
+}
