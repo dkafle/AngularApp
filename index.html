@@ -1,24 +1,58 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" ng-app="csvUploader">
 
 <head>
 <meta charset="utf-8">
 <title>Angular Demo App</title>
 <script src="node_modules/aws-sdk/dist/aws-sdk.js"></script>
 <script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/ng-file-upload/dist/ng-file-upload-all.js"></script>
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" type="text/css" />
-<style type="text/css">
-	body {
-		width: 80%;
-		margin: 0 auto;
-	}
-	
-</style>
-</head>
+<link rel="stylesheet" href="app/styles/style.css" />
 
+<script src="app/index.js"></script>
+<script src="app/services/mainService.js"></script>
+<script src="app/controllers/mainController.js"></script>
+<script src="app/controllers/uploadController.js"></script>
+</head>
 <body>
 
-<h3>Angular Demo App</h3>
+<h3>CSV Uploader</h3>
+<div ng-controller="uploadController as uploader">
+  <form name="myForm">
+    <fieldset>
+      <legend>Upload CSV File</legend>
+      Username:
+      <input type="text" name="userName" ng-model="username" size="31" required>
+      <i ng-show="myForm.userName.$error.required">*required</i>
+      <br>Photo:
+      <input type="file" ngf-select ng-model="picFile" name="file"    
+             accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
+      <i ng-show="myForm.file.$error.required">*required</i><br>
+      <i ng-show="myForm.file.$error.maxSize">File too large 
+          {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+      <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> 
+      <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+      <br>
+      <button ng-disabled="!myForm.$valid" ng-click="uploadCsv(picFile)">Submit</button>
+      <span class="progress" ng-show="picFile.progress >= 0">
+        <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+      </span>
+      <span ng-show="picFile.result">Upload Successful</span>
+      <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+    </fieldset>
+    <br>
+  </form>
+</div>
+
+
+<div ng-controller="mainController as fileList">
+	<span>There are {{fileList.items.length}} files.</span>
+	<button ng-click="fileList.addFile()">Add File</button>
+	<ul>
+		<li ng-repeat="item in fileList.items">{{item.filename}}, {{item.date}}</li>
+	</ul>
+</div>
 
 
 </body>
