@@ -1,0 +1,26 @@
+<div ng-controller="listController as fileList">
+    <fieldset>
+        <legend>File listing from your S3 bucket</legend>
+    	<span>Currently there are {{fileList.items.length}} files in your bucket.</span>
+    	<a class="btn btn-primary" href="#upload" role="button">Add More</a>
+    
+    	<table class="table">
+          <thead class="thead-inverse">
+            <tr>
+              <th>#</th>
+              <th>Key</th>
+              <th>Size</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in fileList.items">
+              <th scope="row">{{$index + 1}}</th>
+              <td>{{item.Key}}</td>
+              <td>{{item.Size}}</td>
+              <td>{{item.LastModified}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </fieldset>
+</div>
