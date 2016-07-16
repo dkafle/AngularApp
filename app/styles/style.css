@@ -26,3 +26,11 @@ form .progress {
     background: orange;
     width: 0;
 }
+
+.error-message {
+    text-align: right;
+    height: 18px;
+}
+.form-control:hover {
+    cursor: auto;
+}

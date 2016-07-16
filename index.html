@@ -16,6 +16,8 @@
 <script src="app/services/mainService.js"></script>
 <script src="app/controllers/listController.js"></script>
 <script src="app/controllers/uploadController.js"></script>
+<script src="app/controllers/signInController.js"></script>
+<script src="app/controllers/menuController.js"></script>
 </head>
 <body>
   <header>
@@ -25,9 +27,11 @@
               <a class="navbar-brand" href="#home">CSV Uploader</a>
           </div>
 
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" ng-init="isSignedIn = false" 
+            ng-controller="menuController as ctrl">
               <li><a href="#home"><i class="fa fa-home"></i> Home</a></li>
-              <li><a href="#sign-in"><i class="fa fa-shield"></i> Sign-in</a></li>
+              <li ng-if="!ctrl.isSignedIn()"><a href="#sign-in"><i class="fa fa-shield"></i> Sign-in</a></li>
+              <li ng-if="ctrl.isSignedIn()"><a href="#" ng-click="ctrl.signOut()"><i class="fa fa-shield"></i> Sign-out</a></li>
               <li><a href="#upload"><i class="fa fa-upload"></i> Upload</a></li>
               <li><a href="#list-files"><i class="fa fa-list"></i> List Files</a></li>
           </ul>
