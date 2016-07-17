@@ -9,12 +9,14 @@
             <tr>
               <th>#</th>
               <th>File Name</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="item in fileList.localItems">
               <th scope="row">{{$index + 1}}</th>
               <td>{{item}}</td>
+              <td><buddon ng-click="fileList.download($index)">Download</buddon></td>
             </tr>
           </tbody>
         </table>
