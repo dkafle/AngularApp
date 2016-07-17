@@ -15,9 +15,6 @@ function ($scope, $http, $timeout, $location, appService) {
             $location.path('/sign-in');
         }
     };
-    fileList.addFile = function () {
-        fileList.items.push({filename: 'newFile.csv', date: new Date()});
-    };
     fileList.getLocalFiles = function () {
         if (appService.isAuthenticated) {
             $http.get('https://express-service-dkafle.c9users.io/listLocalFiles?username=' + appService.username)
