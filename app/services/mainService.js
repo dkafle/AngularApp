@@ -1,8 +1,10 @@
 angular.module('csvUploader')
 .service('appService', function() {
     var isAuthenticated = false;
+    var username = "";
     
     return {
-        isAuthenticated: isAuthenticated
+        isAuthenticated: isAuthenticated,
+        username: username
     }
 })

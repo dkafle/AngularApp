@@ -16,7 +16,8 @@ function ($scope, $http, $timeout, $location, appService) {
             if (result.authenticated) {
                 appService.isAuthenticated = true;
                 $scope.ctrl.isSignedIn = true;
-                 $location.path('/list-files');
+                appService.username = $scope.ctrl.username;
+                $location.path('/list-files');
             } else {
                 appService.isAuthenticated = false;
                 $scope.ctrl.isSignedIn = false;
