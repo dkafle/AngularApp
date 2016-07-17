@@ -1,22 +1,28 @@
 angular.module('csvUploader')
-.controller('listController', ['$scope', '$http', '$timeout', '$location', 'appService',
-function ($scope, $http, $timeout, $location, appService) {
-    var fileList = this;
+.controller('uploadController', ['$scope', '$http', '$location', 
+function ($scope, $http, location) {
+    var self = this;
     
-    fileList.items = [];
-    fileList.getFiles = function () {
-        if (appService.isAuthenticated) {
-            $http.get('https://express-service-dkafle.c9users.io/listFiles').then(function(response) {
-                console.log(response.data);
-                fileList.items = response.data;
-            });
-        } else {
-            $location.path('/sign-in');
-        }
+    self.submit = function () {
+        console.log('get ready to submit');
+        var url = 'https://express-service-dkafle.c9users.io/upload';
+        console.log($scope.picFile);
+        var file = $scope.picFile;
+        var formData = new FormData();
+        formData.append('file', file);
+        $http({
+            method: 'POST',
+            url: url,
+            data: formData,
+            headers: {
+                'Content-Type': undefined
+            } 
+        })
+        .then(function(data) {
+            if(data.statusText === 'OK') {
+                location.path('/list-files');
+            }
+            console.log(data);
+        });
     };
-    fileList.addFile = function () {
-        fileList.items.push({filename: 'newFile.csv', date: new Date()});
-    };
-    //get file as soon as view loads
-    fileList.getFiles();
 }]);

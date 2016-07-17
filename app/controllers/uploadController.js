@@ -1,25 +1,28 @@
 angular.module('csvUploader')
-.controller('uploadController',['$scope', 'Upload', '$timeout', 
-function ($scope, Upload, $timeout) {
-    $scope.uploadCsv = function(file) {
-    file.upload = Upload.upload({
-      url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-      data: {username: $scope.username, file: file},
-    });
-
-    file.upload.then(function (response) {
-      $timeout(function () {
-        file.result = response.data;
-      });
-    }, 
-    function (response) {
-      if (response.status > 0)
-        $scope.errorMsg = response.status + ': ' + response.data;
-    }, 
-    function (evt) {
-      // Math.min is to fix IE which reports 200% sometimes
-      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total, 10));
-    });
-  };
-}
-]);
+.controller('uploadController', ['$scope', '$http', '$location', 
+function ($scope, $http, location) {
+    var self = this;
+    
+    self.submit = function () {
+        console.log('get ready to submit');
+        var url = 'https://express-service-dkafle.c9users.io/upload';
+        console.log($scope.picFile);
+        var file = $scope.picFile;
+        var formData = new FormData();
+        formData.append('file', file);
+        $http({
+            method: 'POST',
+            url: url,
+            data: formData,
+            headers: {
+                'Content-Type': undefined
+            } 
+        })
+        .then(function(data) {
+            if(data.statusText === 'OK') {
+                location.path('/list-files');
+            }
+            console.log(data);
+        });
+    };
+}]);
