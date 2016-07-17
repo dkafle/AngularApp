@@ -1,6 +1,6 @@
 angular.module('csvUploader')
 .controller('uploadController', ['$scope', '$http', '$location', 'appService',
-function ($scope, $http, location, appService) {
+function ($scope, $http, $location, appService) {
   var self = this;
   
   self.submit = function () {
@@ -22,8 +22,14 @@ function ($scope, $http, location, appService) {
     })
     .then(function(data) {
       if(data.statusText === 'OK') {
-        location.path('/list-files');
+        $location.path('/list-files');
       }
     });
   };
+  self.checkUser = function () {
+    if(!appService.isAuthenticated) {
+      $location.path('/sign-in');
+    }
+  };
+  self.checkUser();
 }]);
