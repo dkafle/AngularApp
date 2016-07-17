@@ -3,7 +3,7 @@ angular.module('csvUploader')
 function ($scope, Upload, $timeout) {
     $scope.uploadCsv = function(file) {
     file.upload = Upload.upload({
-      url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+      url: 'https://express-service-dkafle.c9users.io/upload',
       data: {username: $scope.username, file: file},
     });
 
