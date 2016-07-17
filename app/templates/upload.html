@@ -7,7 +7,8 @@
             <div class="input-group">
                 <label class="input-group-addon btn btn-default btn-file">
                     Select File 
-                    <input type="file" style="display: none;" ngf-select ng-model="picFile" name="file" accept="csv/*" required>
+                    <input type="file" style="display: none;" ngf-select ng-model="picFile" name="file" ngf-pattern="'text/csv'"
+                        ngf-accept="'text/csv'"  required>
                 </label>
                 <input type="text" value="{{picFile.name}}" class="form-control" 
                 placeholder="Nothing selected" aria-describedby="basic-addon2" disabled>
