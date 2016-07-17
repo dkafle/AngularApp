@@ -4,6 +4,7 @@ function ($scope, $http, $timeout, $location, appService) {
     var fileList = this;
     
     fileList.items = [];
+    fileList.localItems = [];
     fileList.getFiles = function () {
         if (appService.isAuthenticated) {
             $http.get('https://express-service-dkafle.c9users.io/listFiles').then(function(response) {
@@ -17,6 +18,18 @@ function ($scope, $http, $timeout, $location, appService) {
     fileList.addFile = function () {
         fileList.items.push({filename: 'newFile.csv', date: new Date()});
     };
+    fileList.getLocalFiles = function () {
+        if (appService.isAuthenticated) {
+            $http.get('https://express-service-dkafle.c9users.io/listLocalFiles?username=' + appService.username)
+            .then(function(response) {
+                fileList.localItems = response.data;
+                console.log(response.data);
+            });
+        } else {
+            $location.path('/sign-in');
+        }
+    };
     //get file as soon as view loads
+    fileList.getLocalFiles();
     fileList.getFiles();
 }]);
