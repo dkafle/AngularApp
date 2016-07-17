@@ -5,6 +5,7 @@ function ($scope, $http, $timeout, $location, appService) {
     
     fileList.items = [];
     fileList.localItems = [];
+    fileList.username = appService.username;
     fileList.getFiles = function () {
         if (appService.isAuthenticated) {
             $http.get('https://express-service-dkafle.c9users.io/listFiles').then(function(response) {
